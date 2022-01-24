@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:two_you_friend/pages/home_page.dart';
+import 'package:two_you_friend/pages/name_game.dart';
 
 void main() {
   runApp(MyApp());
@@ -64,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: HomePage(),
+        child: NameGame(),
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
