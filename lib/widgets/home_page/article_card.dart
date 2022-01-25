@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:two_you_friend/pages/article_detail.dart';
 import 'package:two_you_friend/util.struct/article_summary_struct.dart';
 import 'package:two_you_friend/util.struct/user_info_struct.dart';
 import 'package:two_you_friend/widgets/home_page/article_bottom_bar.dart';
@@ -18,6 +19,13 @@ class ArticleCard extends StatelessWidget {
     required this.articleSummaryStruct,
   }) : super(key: key);
 
+  /// 执行页面跳转到article_detail
+  void gotoArticleDetailPage(BuildContext context) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return ArticleDetail();
+    }));
+  }
+
   @override
   Widget build(BuildContext context) {
     print('ArticleCard build');
@@ -25,7 +33,7 @@ class ArticleCard extends StatelessWidget {
       padding: EdgeInsets.all(10),
       color: Colors.white70,
       child: GestureDetector(
-        onTap: () {},
+        onTap: () => gotoArticleDetailPage(context),
         child: Column(
           children: [
             ArticleSummary(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:two_you_friend/model/like_num_model.dart';
 import 'package:two_you_friend/styles/text_styles.dart';
 
 /// 帖子文章的点赞组件
@@ -36,14 +38,15 @@ class _ArticleLikeBarState extends State<ArticleLikeBar> {
   @override
   Widget build(BuildContext context) {
     print('ArticleLikeBar build');
+    final _like = Provider.of<LikeNumModel>(context);
     return GestureDetector(
-      onTap: () => like(),
+      onTap: () => _like.like(),
       child: Row(
         children: [
           Icon(Icons.thumb_up, color: Colors.grey, size: 18),
           Padding(padding: EdgeInsets.only(left: 10)),
           Text(
-            '$_likeNum',
+            '${_like.value}',
             style: TextStyles.commonStyle(),
           )
         ],

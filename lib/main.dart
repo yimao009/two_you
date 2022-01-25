@@ -1,29 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:two_you_friend/pages/name_game_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:two_you_friend/model/like_num_model.dart';
+import 'package:two_you_friend/pages/home_page.dart';
 
 void main() {
-  final store = runApp(MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
-
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Two you',
-      debugShowCheckedModeBanner: true,
-      theme: ThemeData(
-        primaryColor: Colors.blue,
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Two You'),
-        ),
-        body: Center(
-          child: NameGameProvider(),
-        ),
-      ),
+    return ChangeNotifierProvider.value(
+      value: LikeNumModel(),
+      child: MaterialApp(
+          title: 'Two You',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: Scaffold(
+            appBar: AppBar(
+              title: Text('Two You'),
+            ),
+            body: Center(
+              child: HomePage(),
+            ),
+          )),
     );
   }
 }
