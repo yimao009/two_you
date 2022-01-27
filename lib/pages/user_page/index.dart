@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:two_you_friend/util.struct/tools/json_config.dart';
+import 'package:two_you_friend/util/tools/json_config.dart';
 
 /// 首页
 class UserPageIndex extends StatelessWidget {

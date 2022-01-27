@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:two_you_friend/util.struct/CommentInfoStruct.dart';
-import 'package:two_you_friend/util.struct/user_info_struct.dart';
+import 'package:two_you_friend/util/struct/CommentInfoStruct.dart';
+import 'package:two_you_friend/util/struct/user_info_struct.dart';
 
 /// struct 单元测试
 void main() {

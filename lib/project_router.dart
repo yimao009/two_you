@@ -3,19 +3,30 @@ import 'package:flutter/material.dart';
 import 'package:two_you_friend/pages/common/web_view_page.dart';
 import 'package:two_you_friend/pages/home_page/index.dart';
 import 'package:two_you_friend/pages/user_page/index.dart';
+import 'package:two_you_friend/util/struct/router_struct.dart';
+import 'package:two_you_friend/widgets/common/error_page.dart';
 
 /// app 协议头
 const String appScheme = 'tyfapp';
 
-/// action mapping
-const Map<String, List<String>?> paramsMapping = {
-  'homepage': null,
-  'userpage': ['userId'],
+/// 路由配置信息
+/// widget 为组件
+/// entranceIndex 为首页位置，如果非首页则为-1
+/// params 为组件需要的参数数组
+const Map<String, RouterStruct?> routerMapping = {
+  'homepage': RouterStruct(HomePageIndex(), 0, null),
+  'userpage': RouterStruct(UserPageIndex(), 2, ['userId']),
+  'default': RouterStruct(ErrorPage(), 0, null),
 };
+
+typedef mapValue = Widget Function(BuildContext);
 
 class ProjectRouter {
   /// 解析跳转url，并且分析其内部参数
   Map<String, dynamic> _parseUrl(String url) {
+    if (url == '') {
+      return {'action': '/', 'param': null};
+    }
     // Uri.parse(url);
     if (url.startsWith(appScheme)) {
       url = url.substring(9);
@@ -23,9 +34,6 @@ class ProjectRouter {
 
     int placeIndex = url.indexOf('?');
 
-    if (url == '') {
-      return {'action': '/', 'param': null};
-    }
     if (placeIndex < 0) {
       return {'action': url, 'param': null};
     }
@@ -43,58 +51,39 @@ class ProjectRouter {
       //
       // }
     }
-
     return {'action': action, 'params': params};
   }
 
-  Widget _buildPage(Widget widgetPage) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Two You'),
-      ),
-      body: Center(
-        child: widgetPage,
-      ),
-    );
-  }
-
-  /// 找不到路由 展示错误界面
-  Widget _buildError() {
-    return Container(
-      child: Center(
-        child: Text('错误页面'),
-      ),
-    );
-  }
-
-  /// 根据url处理获得需要跳转的action页面以及需要携带的参数
-  Widget _getPage(String url, Map<String, dynamic> urlParseRet) {
+  /// 执行页面跳转
+  ///
+  /// 需要特别注意以下逻辑
+  /// -1 不在首页，则执行跳转
+  /// 大于 -1 则为首页，需要在首页进行 tab 切换，而不是进行跳转
+  int open(BuildContext context, String url) {
+    // 非entrance入口标识
+    int notEntrancePageIndex = -1;
     if (url.startsWith('https://') || url.startsWith('http://')) {
-      return CommonWebViewPage(url: url);
-    } else if (url.startsWith(appScheme)) {
-      // 判断是否解析出 path action，并且能否在路由配置中找到
-      String pathAction = urlParseRet['action'].toString();
-      switch (pathAction) {
-        case 'homepage':
-          {
-            return _buildPage(HomePageIndex());
-          }
-        case 'userpage':
-          {
-            // 必要性检查，如果没有参数则不做任何处理 null-safe
-            // if(urlParseRet['params']['user_id'].toString() == null) {
-            //   return null;
-            // }
-            return _buildPage(UserPageIndex(
-                userId: urlParseRet['params']['user_id'].toString()));
-          }
-        default:
-          {
-            return _buildPage(HomePageIndex());
-          }
-      }
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return CommonWebViewPage(url: url);
+      }));
+      return notEntrancePageIndex;
     }
-    return _buildPage(_buildError());
+    Map<String, dynamic> urlParseRet = _parseUrl(url);
+    int entranceIndex =
+        routerMapping[urlParseRet['action']]?.entranceIndex ?? -1;
+    if (entranceIndex > notEntrancePageIndex) {
+      // 判断为首页，返回切换的tab信息
+      return entranceIndex;
+    }
+    Navigator.pushNamedAndRemoveUntil(context, urlParseRet['action'].toString(),
+        (route) {
+      if (route.settings.name == urlParseRet['action'].toString()) {
+        return false;
+      }
+      return true;
+    });
+    // 执行跳转，非首页
+    return notEntrancePageIndex;
   }
 
   /// 执行页面跳转
@@ -116,10 +105,39 @@ class ProjectRouter {
     }, arguments: urlParseRet['params']);
   }
 
+  /// 增加 scaffold
+  Widget _buildPage(Widget widgetPage) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Two You'),
+      ),
+      body: Center(
+        child: widgetPage,
+      ),
+    );
+  }
+
+  /// 注册路由事件
   Map<String, Widget Function(BuildContext)> registerRouter() {
-    return {
-      'hoempage': (context) => _buildPage(HomePageIndex()),
-      'userpage': (context) => _buildPage(UserPageIndex()),
-    };
+    Map<String, mapValue> routerInfo = {};
+    routerMapping.forEach((routerName, routerData) {
+      if (routerName == 'default') {
+        // 默认逻辑不处理
+        return;
+      }
+      routerInfo[routerName] = (context) => _buildPage(routerData!.widget);
+    });
+    return routerInfo;
+  }
+
+  /// 根据页面路由，获取页面信息
+  Widget getPageByRouter(String pageName) {
+    Widget pageWidget;
+    if (routerMapping[pageName] != null) {
+      pageWidget = routerMapping[pageName]!.widget;
+    } else {
+      pageWidget = routerMapping['default']!.widget;
+    }
+    return pageWidget;
   }
 }

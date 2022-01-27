@@ -27,7 +27,8 @@ class JsonConfig {
   }
 
   /// object convert to map data
-  static Map objectToMap(Object data) {
+  static Map objectToMap(Object? data) {
+    if (data == null) return {};
     return jsonDecode(JsonCodec().encode(data)) as Map;
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:two_you_friend/pages/article_detail.dart';
-import 'package:two_you_friend/util.struct/article_summary_struct.dart';
-import 'package:two_you_friend/util.struct/user_info_struct.dart';
+import 'package:two_you_friend/util/struct/article_summary_struct.dart';
+import 'package:two_you_friend/util/struct/user_info_struct.dart';
 import 'package:two_you_friend/widgets/home_page/article_bottom_bar.dart';
 import 'package:two_you_friend/widgets/home_page/article_like_bar.dart';
 import 'package:two_you_friend/widgets/home_page/article_summary.dart';

@@ -1,4 +1,4 @@
-import 'package:two_you_friend/util.struct/user_info_struct.dart';
+import 'package:two_you_friend/util/struct/user_info_struct.dart';
 
 /// CommentListStruct数据结构描述信息
 class CommentInfoStruct {

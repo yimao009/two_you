@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:two_you_friend/util.struct/CommentInfoStruct.dart';
-import 'package:two_you_friend/util.struct/article_summary_struct.dart';
-import 'package:two_you_friend/util.struct/user_info_struct.dart';
+import 'package:two_you_friend/util/struct/CommentInfoStruct.dart';
+import 'package:two_you_friend/util/struct/article_summary_struct.dart';
+import 'package:two_you_friend/util/struct/user_info_struct.dart';
 import 'package:two_you_friend/widgets/article_detail/article_comments.dart';
 import 'package:two_you_friend/widgets/article_detail/article_content.dart';
 import 'package:two_you_friend/widgets/article_detail/article_detail_like.dart';
