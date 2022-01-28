@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:two_you_friend/styles/text_styles.dart';
-import 'package:two_you_friend/util/struct/CommentInfoStruct.dart';
+import 'package:two_you_friend/util/struct/comment_info.dart';
 
 /// 具体的评论内容信息
 ///
@@ -25,7 +25,7 @@ class ArticleComments extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(6.0),
             child: Image.network(
-              commentItem.userInfo.headerImage,
+              commentItem.userInfo.headerUrl,
               width: 50.0,
               height: 50.0,
               fit: BoxFit.scaleDown,
@@ -38,7 +38,7 @@ class ArticleComments extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                commentItem.userInfo.nickname,
+                commentItem.userInfo.nickName,
                 style: TextStyles.commonStyle(),
               ),
               Text(

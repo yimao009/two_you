@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-// 顶部导航栏
-import 'package:two_you_friend/pages/entrance_bottom_bar.dart';
-
-/// 底部导航栏
-/// import 'package:two_you_friend/pages/entrance_top_bar.dart';
-
-///
+import 'package:provider/provider.dart';
+import 'package:two_you_friend/model/like_num_model.dart';
+import 'package:two_you_friend/pages/entrance.dart';
 import 'package:two_you_friend/project_router.dart';
 
 void main() {
@@ -17,13 +13,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Two You',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return ChangeNotifierProvider<LikeNumModel>.value(
+      value: LikeNumModel(),
+      child: MaterialApp(
+        title: 'Two You',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        routes: ProjectRouter().registerRouter(),
+        home: Entrance(),
       ),
-      routes: ProjectRouter().registerRouter(),
-      home: Entrance(),
     );
   }
 }

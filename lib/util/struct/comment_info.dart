@@ -1,9 +1,14 @@
 import 'package:two_you_friend/util/struct/user_info_struct.dart';
 
-/// CommentListStruct数据结构描述信息
+/// 用户信息
+///
+/// {
+///   "userInfo" : "StructUserInfo",
+///   "comment" : "string"
+/// }
 class CommentInfoStruct {
   /// 用户的昵称
-  final UserInfoStruct userInfo;
+  final StructUserInfo userInfo;
 
   /// 用户头像信息
   final String comment;

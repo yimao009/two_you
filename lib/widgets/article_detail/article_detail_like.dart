@@ -8,6 +8,17 @@ import 'package:two_you_friend/styles/text_styles.dart';
 /// 包括点赞组件 icon ，以及组件点击效果
 /// 需要外部参数[likeNum],点赞数量
 class ArticleDetailLike extends StatelessWidget {
+  /// 帖子id
+  final String articleId;
+
+  /// like num
+  final int likeNum;
+
+  /// 构造函数
+  const ArticleDetailLike(
+      {Key? key, required this.articleId, required this.likeNum})
+      : super(key: key);
+
   /// 有状态类返回组件信息
   @override
   Widget build(BuildContext context) {
@@ -18,10 +29,10 @@ class ArticleDetailLike extends StatelessWidget {
       children: <Widget>[
         FlatButton(
           child: Icon(Icons.thumb_up, color: Colors.grey, size: 40),
-          onPressed: () => likeNumModel.like(),
+          onPressed: () => likeNumModel.like(articleId),
         ),
         Text(
-          '${likeNumModel.value}',
+          '${likeNumModel.getLikeNum(articleId)}',
           style: TextStyles.commonStyle(),
         ),
       ],

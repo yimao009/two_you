@@ -10,7 +10,10 @@ void main() {
   final LikeNumModel likeNumModel = LikeNumModel();
 
   testWidgets('test article like widget', (WidgetTester tester) async {
-    final Widget testWidgets = ArticleDetailLike();
+    final Widget testWidgets = ArticleDetailLike(
+      articleId: '',
+      likeNum: 4,
+    );
     await tester.pumpWidget(
       ChangeNotifierProvider.value(
         value: likeNumModel,

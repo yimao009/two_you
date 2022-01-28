@@ -10,9 +10,9 @@ void main() {
   });
 
   test('test like model like method', () {
-    likeNumModel.like();
+    likeNumModel.like('');
     expect(likeNumModel.value, 1);
-    likeNumModel.like();
+    likeNumModel.like('');
     expect(likeNumModel.value, 2);
   });
 }

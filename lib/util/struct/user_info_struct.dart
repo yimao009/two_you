@@ -1,11 +1,24 @@
-/// userInfo数据结构描述信息
-class UserInfoStruct {
-  /// 用户的昵称
-  final String nickname;
+/// 用户信息
+///
+/// {
+///   "nickname" : "string",
+///   "headerUrl" : "string",
+///   "uid" : "string"
+/// }
+class StructUserInfo {
+  /// 标题
+  final String nickName;
 
-  /// 用户头像信息
-  final String headerImage;
+  /// 简要
+  final String headerUrl;
 
-  /// 构造函数
-  const UserInfoStruct(this.nickname, this.headerImage);
+  /// 主要内容
+  final String uid;
+
+  /// 默认构造函数
+  const StructUserInfo(
+    this.uid,
+    this.nickName,
+    this.headerUrl,
+  );
 }

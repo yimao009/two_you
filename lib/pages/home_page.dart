@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:two_you_friend/util/struct/article_summary_struct.dart';
+import 'package:two_you_friend/util/struct/content_detail.dart';
 import 'package:two_you_friend/util/struct/user_info_struct.dart';
 import 'package:two_you_friend/widgets/common/banner_info.dart';
 import 'package:two_you_friend/widgets/home_page/article_card.dart';
@@ -13,16 +13,28 @@ class HomePage extends StatelessWidget {
       'https://img.089t.com/content/20200227/osbbw9upeelfqnxnwt0glcht.jpg';
 
   /// 帖子标题
-  final UserInfoStruct userInfo = UserInfoStruct('flutter',
-      'https://i.pinimg.com/originals/1f/00/27/1f0027a3a80f470bcfa5de596507f9f4.png');
+  final StructUserInfo userInfo = StructUserInfo(
+    '1001',
+    'test 001',
+    'http://image.biaobaiju.com/uploads/20180211/00/1518279965-WhqyaQodpn.jpg',
+  );
 
   /// 帖子概要描述信息
-  final ArticleSummaryStruct articleInfo = ArticleSummaryStruct(
-      '你好，教个朋友',
-      '我是一个小可爱，很长的一个测试看看效果，会换行吗',
-      'https://i.pinimg.com/originals/e0/64/4b/e0644bd2f13db50d0ef6a4df5a756fd9.png',
-      20,
-      30);
+
+  final StructContentDetail contentDetail = StructContentDetail(
+    '1001',
+    '长相思·一重山',
+    '一重山，两重山。山远天高烟水寒，相思枫叶丹\n'
+        '菊花开，菊花残。塞雁高飞人未还，一帘风月闲',
+    '一重又一重，重重叠叠的山啊。山是那么远，天是那么高，烟云水气又冷又寒，可我的思念像火焰般的枫叶那样。\n'
+        '菊花开了又落了，日子一天天过去。塞北的大雁在高空振翅南飞，思念的人却还没有回来。悠悠明月照在帘子上，随风飘飘然。',
+    '1001',
+    2,
+    3,
+    'http://1861.img.pp.sohu.com.cn/images/2011/9/23/15/13/u132152629_133523d58dcg215_b.jpg',
+    userInfo: StructUserInfo('1001', '且听风铃',
+        'http://image.biaobaiju.com/uploads/20180211/00/1518279965-WhqyaQodpn.jpg'),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +43,7 @@ class HomePage extends StatelessWidget {
         child: Column(
       children: [
         BannerInfo(bannerImage: bannerImage),
-        ArticleCard(infoStruct: userInfo, articleSummaryStruct: articleInfo),
+        ArticleCard(articleInfo: contentDetail),
       ],
     ));
   }

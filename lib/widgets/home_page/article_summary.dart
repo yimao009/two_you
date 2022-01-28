@@ -49,12 +49,14 @@ class ArticleSummary extends StatelessWidget {
   Widget build(BuildContext context) {
     print('ArticleSummary build');
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
           child: getLeftInfo(),
           flex: 6,
         ),
         Expanded(
+          flex: 2,
           child: Image.network(
             articleImage,
             width: 80,
