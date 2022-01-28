@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class TextStyles {
   static double baseFontSize = 18.0;
 
-  static TextStyle commonStyle([double multipleFontSize = 1]) {
+  static TextStyle commonStyle(
+      [double multipleFontSize = 1, Color myColor = Colors.lightBlueAccent]) {
     return TextStyle(
       color: Colors.lightBlueAccent,
       fontSize: baseFontSize * multipleFontSize,

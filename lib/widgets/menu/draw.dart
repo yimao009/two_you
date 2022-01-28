@@ -53,6 +53,14 @@ class MenuDraw extends StatelessWidget {
                   redirect('tyfapp://imgflow');
                 },
               ),
+              ListTile(
+                title: Text('单图信息'),
+                leading: Icon(Icons.person),
+                onTap: () {
+                  Navigator.pop(context);
+                  redirect('tyfapp://singlepage');
+                },
+              ),
             ],
           )),
     );

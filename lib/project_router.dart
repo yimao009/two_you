@@ -4,6 +4,7 @@ import 'package:two_you_friend/pages/article_detail/index.dart';
 import 'package:two_you_friend/pages/common/web_view_page.dart';
 import 'package:two_you_friend/pages/home_page/img_flow.dart';
 import 'package:two_you_friend/pages/home_page/index.dart';
+import 'package:two_you_friend/pages/home_page/single.dart';
 import 'package:two_you_friend/pages/user_page/index.dart';
 import 'package:two_you_friend/util/struct/router_struct.dart';
 
@@ -20,7 +21,7 @@ const Map<String, RouterStruct?> routerMapping = {
   'contentpage': RouterStruct(const ArticleDetailIndex(), -1, ['articleId']),
   'default': RouterStruct(const HomePageIndex(), 0, null),
   'imgflow': RouterStruct(HomePageImgFlow(), -1, null),
-  // 'singlepage': RouterStruct(HomePageSingle(), -1, null)
+  'singlepage': RouterStruct(HomePageSingle(), -1, null)
 };
 
 typedef mapValue = Widget Function(BuildContext);
