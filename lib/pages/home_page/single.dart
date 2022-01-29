@@ -25,7 +25,7 @@ class _HomePageSingleState extends State<HomePageSingle> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    contentList = APIContentIndex().getRecommendList();
+    contentList = APIContentIndex().getRecommendList().data;
   }
 
   @override
